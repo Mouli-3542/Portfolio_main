@@ -2,7 +2,7 @@
 
 // ─────────────────────────────────────────────────────────────
 // PROJECT CARD — src/components/ProjectCard.jsx
-// Displays project thumbnail, title, and info. Clicks to detail page.
+// Displays project thumbnail with enhanced edge glow on hover
 // ─────────────────────────────────────────────────────────────
 
 import { useState } from 'react'
@@ -25,23 +25,44 @@ export default function ProjectCard({ project, index }) {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
-        className="relative rounded-xl overflow-hidden border border-thin
+        className="relative rounded-2xl overflow-hidden border border-thin
                    bg-bg-card group cursor-pointer h-full"
         style={{
           boxShadow: hovered
-            ? '0 20px 60px rgba(0,0,0,0.4)'
+            ? '0 0 30px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2), 0 20px 60px rgba(0,0,0,0.4)'
             : '0 4px 20px rgba(0,0,0,0.2)',
-          transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
-          transition: 'all 0.25s ease',
+          transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+          transition: 'all 0.3s ease',
         }}
       >
-        {/* Hover glow effect */}
+        {/* Enhanced edge glow effect */}
         <motion.div
-          className="absolute inset-0 rounded-xl pointer-events-none z-0"
+          className="absolute inset-0 rounded-2xl pointer-events-none z-20"
           animate={{ opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.3 }}
           style={{
-            background: 'radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.08) 0%, transparent 60%)',
+            boxShadow: 'inset 0 0 30px rgba(59, 130, 246, 0.3), inset 0 0 60px rgba(59, 130, 246, 0.1)',
+          }}
+        />
+
+        {/* Outer glow border */}
+        <motion.div
+          className="absolute -inset-[1px] rounded-2xl pointer-events-none z-10"
+          animate={{ opacity: hovered ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+          style={{
+            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(147, 51, 234, 0.3), rgba(59, 130, 246, 0.5))',
+            padding: '2px',
+          }}
+        />
+
+        {/* Background glow */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl pointer-events-none z-0"
+          animate={{ opacity: hovered ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+          style={{
+            background: 'radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.15) 0%, transparent 50%), radial-gradient(ellipse at bottom right, rgba(147, 51, 234, 0.1) 0%, transparent 50%)',
           }}
         />
 
@@ -90,7 +111,9 @@ export default function ProjectCard({ project, index }) {
 
             {/* Category badge */}
             <div className="absolute top-3 left-3">
-              <span className="tag-pill text-[0.68rem]">{project.category}</span>
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-[0.68rem] font-medium bg-accent-blue/20 border border-accent-blue/30 text-accent-blue-soft">
+                {project.category}
+              </span>
             </div>
           </div>
 
@@ -122,7 +145,7 @@ export default function ProjectCard({ project, index }) {
               {project.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="text-[0.68rem] px-2 py-0.5 rounded-full font-medium
+                  className="text-[0.68rem] px-3 py-1 rounded-full font-medium
                              bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)]
                              text-ink-muted"
                 >

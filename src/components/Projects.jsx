@@ -12,7 +12,7 @@ import Link from 'next/link'
 
 export default function Projects() {
   return (
-    <section id="projects" className="section-py relative overflow-hidden projects-gradient">
+    <section id="projects" className="py-24 md:py-32 relative overflow-hidden projects-gradient">
 
       {/* Background blue glow */}
       <div aria-hidden className="pointer-events-none absolute inset-0">

@@ -32,13 +32,15 @@ export default function Footer() {
 
           {/* Brand */}
           <Link href="/" className="flex items-center gap-2.5">
-            <Image
-              src="/images/cinova-logo.png"
-              alt="Cinova Visuals"
-              width={28}
-              height={28}
-              className="rounded-lg"
-            />
+            <div className="w-8 h-8 rounded-full border-2 border-gray-300 overflow-hidden flex items-center justify-center bg-gray-100">
+              <Image
+                src="/images/cinova-logo.png"
+                alt="Cinova Visuals"
+                width={24}
+                height={24}
+                className="object-cover"
+              />
+            </div>
             <span className="font-display font-700 text-ink-primary text-sm tracking-tight">
               Cinova Visuals
             </span>
@@ -65,7 +67,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 rounded-lg border border-thin flex items-center justify-center
+              className="w-8 h-8 rounded-full border border-thin flex items-center justify-center
                          text-ink-muted hover:text-ink-primary hover:border-[rgba(255,255,255,0.12)]
                          transition-colors"
               aria-label="Instagram"
@@ -83,7 +85,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 rounded-lg border border-thin flex items-center justify-center
+              className="w-8 h-8 rounded-full border border-thin flex items-center justify-center
                          text-ink-muted hover:text-ink-primary hover:border-[rgba(255,255,255,0.12)]
                          transition-colors"
               aria-label="X / Twitter"
@@ -97,7 +99,7 @@ export default function Footer() {
               onClick={scrollToTop}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 rounded-lg border border-thin flex items-center justify-center
+              className="w-8 h-8 rounded-full border border-thin flex items-center justify-center
                          text-ink-muted hover:text-ink-primary hover:border-[rgba(255,255,255,0.12)]
                          transition-colors ml-1"
               aria-label="Back to top"

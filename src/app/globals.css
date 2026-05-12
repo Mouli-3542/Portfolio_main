@@ -29,7 +29,7 @@
   --border-soft:  rgba(255, 255, 255, 0.1);
 
   --radius-card:  1rem;
-  --radius-btn:   0.5rem;
+  --radius-btn:   9999px;
 
   --font-display: 'Syne', sans-serif;
   --font-body:    'Plus Jakarta Sans', sans-serif;
@@ -148,7 +148,7 @@ body {
   color: var(--accent-blue-soft);
 }
 
-/* ─── Button Base ───────────────────────────────────────────── */
+/* ─── Button Base — More Rounded ────────────────────────────── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -160,7 +160,7 @@ body {
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.02em;
-  border-radius: var(--radius-btn);
+  border-radius: 9999px;
   transition: all 0.2s ease;
   cursor: pointer;
   border: none;
@@ -188,7 +188,7 @@ body {
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.02em;
-  border-radius: var(--radius-btn);
+  border-radius: 9999px;
   border: 1px solid var(--border-soft);
   transition: all 0.2s ease;
   cursor: pointer;
@@ -216,7 +216,7 @@ body {
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 0.85rem;
-  border-radius: var(--radius-btn);
+  border-radius: 9999px;
   border: 1px solid var(--border-thin);
   transition: all 0.15s ease;
   cursor: pointer;
@@ -233,6 +233,41 @@ body {
   transform: scale(0.98);
 }
 
+/* ─── Dark Pill Button (like Book a Call) ───────────────────── */
+.btn-dark-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-dark-pill:hover {
+  background: #262626;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.btn-dark-pill:active {
+  transform: translateY(0);
+}
+
+/* ─── Light Section Styles ──────────────────────────────────── */
+.section-light {
+  background: #F8F8F8;
+  color: #1a1a1a;
+}
+
 /* ─── Projects Section Blue Gradient ────────────────────────── */
 .projects-gradient {
   background: linear-gradient(
@@ -243,4 +278,28 @@ body {
     rgba(59, 130, 246, 0.03) 70%,
     var(--bg-primary) 100%
   );
+}
+
+/* ─── Typing Dots Animation ─────────────────────────────────── */
+@keyframes typing-dot {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.typing-dot {
+  animation: typing-dot 1s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
 }

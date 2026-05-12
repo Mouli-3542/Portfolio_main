@@ -107,7 +107,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="flex items-center gap-3 px-4 py-3 rounded-lg
+              className="flex items-center gap-3 px-4 py-3 rounded-full
                          border border-thin bg-bg-card
                          hover:border-[rgba(255,255,255,0.12)] hover:bg-bg-elevated
                          transition-all duration-200 group"
