@@ -2,12 +2,13 @@
 
 // ─────────────────────────────────────────────────────────────
 // HERO SECTION — src/components/Hero.jsx
-// Clean, minimal hero matching the simo.design reference
+// Dark theme with floating project cards that animate on scroll
 // ─────────────────────────────────────────────────────────────
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { links } from '../data/links'
+import { featuredProjects } from '../data/projects'
 import Image from 'next/image'
 
 const containerVariants = {
@@ -26,26 +27,119 @@ const itemVariants = {
   },
 }
 
+// Floating Project Card Component
+function FloatingProjectCard({ project, index, scrollProgress }) {
+  // Each card has different animation parameters
+  const cardConfigs = [
+    { initialRotate: -5, initialX: 0, initialY: 0, scale: 1 },
+    { initialRotate: 3, initialX: 30, initialY: 20, scale: 0.95 },
+    { initialRotate: 8, initialX: 60, initialY: 40, scale: 0.9 },
+  ]
+  
+  const config = cardConfigs[index] || cardConfigs[0]
+  
+  // Animate cards spreading out as user scrolls
+  const y = useTransform(scrollProgress, [0, 0.5], [0, 200 + index * 250])
+  const x = useTransform(scrollProgress, [0, 0.5], [config.initialX, -300 + index * 350])
+  const rotate = useTransform(scrollProgress, [0, 0.5], [config.initialRotate, 0])
+  const scale = useTransform(scrollProgress, [0, 0.5], [config.scale, 1])
+  const opacity = useTransform(scrollProgress, [0.4, 0.6], [1, 0])
+
+  return (
+    <motion.div
+      style={{
+        y,
+        x,
+        rotate,
+        scale,
+        opacity,
+        zIndex: 3 - index,
+      }}
+      className="absolute w-[320px] h-[220px] rounded-2xl overflow-hidden cursor-pointer"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.5 + index * 0.15 }}
+    >
+      {/* Card glow effect */}
+      <div 
+        className="absolute inset-0 rounded-2xl"
+        style={{
+          background: index === 0 
+            ? 'linear-gradient(135deg, rgba(136, 243, 231, 0.1) 0%, transparent 50%)'
+            : index === 1 
+            ? 'linear-gradient(135deg, rgba(81, 2, 246, 0.1) 0%, transparent 50%)'
+            : 'linear-gradient(135deg, rgba(40, 40, 129, 0.2) 0%, transparent 50%)',
+          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(136, 243, 231, 0.05)',
+          border: '1px solid rgba(136, 243, 231, 0.1)',
+        }}
+      />
+      
+      {/* Card content */}
+      <div className="relative h-full p-5 flex flex-col justify-between bg-[#0d1a1c]/90 backdrop-blur-sm">
+        {/* Browser dots */}
+        <div className="flex gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"/>
+          <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]"/>
+          <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]"/>
+        </div>
+        
+        <div>
+          <p className="text-[#6ba8a3] text-xs mb-1">{project.category}</p>
+          <h3 className="font-display font-bold text-[#dffcfa] text-lg mb-2">{project.title}</h3>
+          <p className="text-[#6ba8a3] text-sm line-clamp-2">{project.description}</p>
+        </div>
+        
+        {/* Tags */}
+        <div className="flex gap-2 flex-wrap">
+          {project.tags.slice(0, 2).map((tag) => (
+            <span 
+              key={tag} 
+              className="text-[0.65rem] px-2 py-0.5 rounded-full bg-[rgba(136,243,231,0.1)] text-[#88f3e7] border border-[rgba(136,243,231,0.2)]"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function Hero() {
   const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const { scrollYProgress } = useScroll({ 
+    target: ref, 
+    offset: ['start start', 'end start'] 
+  })
+  
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '15%'])
 
   return (
     <section
       ref={ref}
       id="home"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#F8F8F8]"
-      style={{ paddingTop: '7rem', paddingBottom: '5rem' }}
+      className="relative min-h-[120vh] flex flex-col justify-center overflow-hidden"
+      style={{ 
+        paddingTop: '7rem', 
+        paddingBottom: '5rem',
+        background: 'linear-gradient(180deg, #061012 0%, #0a1416 50%, #061012 100%)',
+      }}
     >
       {/* Background Elements */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03]"
+        <div className="absolute inset-0 opacity-[0.02]"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.5) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0,0,0,0.5) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(136, 243, 231, 0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(136, 243, 231, 0.5) 1px, transparent 1px)`,
             backgroundSize: '60px 60px',
+          }}
+        />
+        {/* Radial glow */}
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[800px]"
+          style={{
+            background: 'radial-gradient(ellipse, rgba(136, 243, 231, 0.03) 0%, transparent 60%)',
           }}
         />
       </div>
@@ -65,8 +159,15 @@ export default function Hero() {
           >
             {/* Availability Badge */}
             <motion.div variants={itemVariants} className="mb-8">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 shadow-sm text-sm font-medium text-gray-700">
-                <span className="w-2 h-2 rounded-full bg-green-500" />
+              <span 
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
+                style={{
+                  background: 'rgba(136, 243, 231, 0.08)',
+                  border: '1px solid rgba(136, 243, 231, 0.2)',
+                  color: '#88f3e7',
+                }}
+              >
+                <span className="w-2 h-2 rounded-full bg-[#88f3e7] animate-pulse" />
                 Available for Q1
               </span>
             </motion.div>
@@ -76,10 +177,10 @@ export default function Hero() {
               variants={itemVariants}
               className="font-display leading-[0.95] tracking-tight mb-8"
             >
-              <span className="block text-[clamp(2.5rem,6vw,4.5rem)] text-gray-400 font-medium italic">
+              <span className="block text-[clamp(2.5rem,6vw,4.5rem)] text-[#6ba8a3] font-medium italic">
                 Motion that
               </span>
-              <span className="block text-[clamp(2.5rem,6vw,4.5rem)] text-gray-900 font-bold">
+              <span className="block text-[clamp(2.5rem,6vw,4.5rem)] text-[#dffcfa] font-bold">
                 drives growth.
               </span>
             </motion.h1>
@@ -90,10 +191,10 @@ export default function Hero() {
               className="font-body text-[clamp(1rem,1.2vw,1.1rem)]
                          leading-relaxed max-w-lg mb-10"
             >
-              <span className="text-gray-900 font-semibold">
+              <span className="text-[#dffcfa] font-semibold">
                 I design strategic animations that capture attention and drive sales.
               </span>{' '}
-              <span className="text-gray-500">
+              <span className="text-[#6ba8a3]">
                 Purpose-driven motion to turn your viewers into loyal customers.
               </span>
             </motion.p>
@@ -104,9 +205,29 @@ export default function Hero() {
                 href={links.bookCall}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-6 py-3.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors shadow-lg"
+                className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full font-medium transition-all duration-300"
+                style={{
+                  background: '#0d1a1c',
+                  border: '1px solid rgba(136, 243, 231, 0.2)',
+                  color: '#dffcfa',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.4)'
+                  e.currentTarget.style.boxShadow = '0 8px 30px rgba(136, 243, 231, 0.15)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.2)'
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)'
+                }}
               >
-                <span className="w-8 h-8 rounded-full border-2 border-gray-600 overflow-hidden flex items-center justify-center bg-gray-800">
+                <span 
+                  className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center"
+                  style={{
+                    border: '2px solid rgba(136, 243, 231, 0.3)',
+                    background: 'rgba(136, 243, 231, 0.05)',
+                  }}
+                >
                   <Image
                     src="/images/cinova-logo.png"
                     alt="Cinova"
@@ -120,66 +241,19 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Floating Cards */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative hidden lg:block"
-          >
-            <div className="relative w-full h-[500px]">
-              {/* Background Card - Black with green gradient */}
-              <motion.div
-                animate={{ rotate: [8, 10, 8], y: [0, -5, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute top-0 right-0 w-[380px] h-[280px] rounded-2xl bg-gradient-to-br from-green-600 to-gray-900"
-              />
-              
-              {/* Middle Card - Dark with chart */}
-              <motion.div
-                animate={{ rotate: [-3, -5, -3], y: [0, 5, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute top-10 right-10 w-[380px] h-[280px] rounded-2xl bg-gray-900 shadow-2xl overflow-hidden"
-              >
-                <div className="p-4 h-full flex flex-col justify-end">
-                  {/* Mock chart lines */}
-                  <svg viewBox="0 0 100 40" className="w-full h-20">
-                    <path d="M0 35 L20 30 L40 25 L60 15 L80 20 L100 5" stroke="#22c55e" strokeWidth="2" fill="none"/>
-                    <path d="M0 38 L20 35 L40 32 L60 28 L80 30 L100 25" stroke="#ef4444" strokeWidth="2" fill="none"/>
-                  </svg>
-                </div>
-              </motion.div>
-
-              {/* Front Card - White document */}
-              <motion.div
-                animate={{ rotate: [-2, 0, -2], y: [0, -8, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute top-20 right-20 w-[380px] h-[280px] rounded-2xl bg-white shadow-2xl border border-gray-200 p-6"
-              >
-                {/* Browser dots */}
-                <div className="flex gap-1.5 mb-4">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-400"/>
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-400"/>
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-400"/>
-                </div>
-                
-                <h3 className="font-bold text-gray-900 text-lg mb-2">Project plan: Q1 strategy</h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">
-                  The primary strategic objective for the first quarter of the fiscal year is to significantly scale our operational efficiency...
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-base">{"📊"}</span>
-                    <span className="text-sm font-medium text-gray-700">Q1 Key Deliverables</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <span className="w-2 h-2 rounded-full bg-blue-500"/>
-                    Market Analysis Research
-                  </div>
-                </div>
-              </motion.div>
+          {/* Right Content - Floating Project Cards */}
+          <div className="relative hidden lg:block h-[500px]">
+            <div className="relative w-full h-full">
+              {featuredProjects.slice(0, 3).map((project, index) => (
+                <FloatingProjectCard
+                  key={project.id}
+                  project={project}
+                  index={index}
+                  scrollProgress={scrollYProgress}
+                />
+              ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
 
@@ -191,7 +265,8 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <motion.div
-          className="w-6 h-6 rounded-full bg-gray-900"
+          className="w-6 h-6 rounded-full"
+          style={{ background: '#88f3e7' }}
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         />

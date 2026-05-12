@@ -4,6 +4,16 @@
 // ─────────────────────────────────────────────────────────────
 
 import './globals.css'
+import { GeistSans } from 'geist/font/sans'
+import { Inter } from 'next/font/google'
+
+// Using Inter as SF Pro Display alternative (very similar design)
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sf-pro',
+  weight: ['500', '600', '700'],
+  display: 'swap',
+})
 
 // ── SEO METADATA — edit these values ──────────────────────────
 export const metadata = {
@@ -37,8 +47,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="bg-bg-primary text-ink-primary font-body antialiased overflow-x-hidden">
+    <html lang="en" className={`scroll-smooth ${GeistSans.variable} ${inter.variable}`}>
+      <body className="bg-[#061012] text-[#dffcfa] font-body antialiased overflow-x-hidden">
         {children}
       </body>
     </html>

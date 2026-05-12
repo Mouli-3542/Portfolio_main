@@ -2,7 +2,7 @@
 
 // ─────────────────────────────────────────────────────────────
 // FOOTER — src/components/Footer.jsx
-// Clean minimal footer with logo
+// Clean minimal footer with logo - Dark theme
 // ─────────────────────────────────────────────────────────────
 
 import { motion } from 'framer-motion'
@@ -23,7 +23,13 @@ export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
-    <footer className="relative border-t border-[rgba(255,255,255,0.05)] py-8">
+    <footer 
+      className="relative py-8"
+      style={{
+        background: '#061012',
+        borderTop: '1px solid rgba(136, 243, 231, 0.08)',
+      }}
+    >
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Top row */}
@@ -32,7 +38,13 @@ export default function Footer() {
 
           {/* Brand */}
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full border-2 border-gray-300 overflow-hidden flex items-center justify-center bg-gray-100">
+            <div 
+              className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center"
+              style={{
+                border: '2px solid rgba(136, 243, 231, 0.3)',
+                background: 'rgba(136, 243, 231, 0.05)',
+              }}
+            >
               <Image
                 src="/images/cinova-logo.png"
                 alt="Cinova Visuals"
@@ -41,7 +53,7 @@ export default function Footer() {
                 className="object-cover"
               />
             </div>
-            <span className="font-display font-700 text-ink-primary text-sm tracking-tight">
+            <span className="font-display font-bold text-sm tracking-tight" style={{ color: '#dffcfa' }}>
               Cinova Visuals
             </span>
           </Link>
@@ -52,7 +64,10 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-ink-muted hover:text-ink-primary transition-colors text-[0.8rem]"
+                className="transition-colors text-[0.8rem]"
+                style={{ color: '#6ba8a3' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#88f3e7'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#6ba8a3'}
               >
                 {link.label}
               </Link>
@@ -67,9 +82,19 @@ export default function Footer() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 rounded-full border border-thin flex items-center justify-center
-                         text-ink-muted hover:text-ink-primary hover:border-[rgba(255,255,255,0.12)]
-                         transition-colors"
+              className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
+              style={{
+                border: '1px solid rgba(136, 243, 231, 0.1)',
+                color: '#6ba8a3',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.3)'
+                e.currentTarget.style.color = '#88f3e7'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.1)'
+                e.currentTarget.style.color = '#6ba8a3'
+              }}
               aria-label="Instagram"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -85,9 +110,19 @@ export default function Footer() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 rounded-full border border-thin flex items-center justify-center
-                         text-ink-muted hover:text-ink-primary hover:border-[rgba(255,255,255,0.12)]
-                         transition-colors"
+              className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
+              style={{
+                border: '1px solid rgba(136, 243, 231, 0.1)',
+                color: '#6ba8a3',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.3)'
+                e.currentTarget.style.color = '#88f3e7'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.1)'
+                e.currentTarget.style.color = '#6ba8a3'
+              }}
               aria-label="X / Twitter"
             >
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
@@ -99,9 +134,19 @@ export default function Footer() {
               onClick={scrollToTop}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 rounded-full border border-thin flex items-center justify-center
-                         text-ink-muted hover:text-ink-primary hover:border-[rgba(255,255,255,0.12)]
-                         transition-colors ml-1"
+              className="w-8 h-8 rounded-full flex items-center justify-center transition-all ml-1"
+              style={{
+                border: '1px solid rgba(136, 243, 231, 0.1)',
+                color: '#6ba8a3',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.3)'
+                e.currentTarget.style.color = '#88f3e7'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.1)'
+                e.currentTarget.style.color = '#6ba8a3'
+              }}
               aria-label="Back to top"
             >
               <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
@@ -113,12 +158,15 @@ export default function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center
-                        justify-between gap-2 pt-5 border-t border-[rgba(255,255,255,0.04)]">
-          <p className="text-ink-subtle text-[0.72rem]">
+        <div 
+          className="flex flex-col sm:flex-row items-start sm:items-center
+                      justify-between gap-2 pt-5"
+          style={{ borderTop: '1px solid rgba(136, 243, 231, 0.05)' }}
+        >
+          <p className="text-[0.72rem]" style={{ color: '#3d6663' }}>
             &copy; {year} Cinova Visuals. All rights reserved.
           </p>
-          <p className="text-ink-subtle text-[0.72rem]">
+          <p className="text-[0.72rem]" style={{ color: '#3d6663' }}>
             Motion Design for SaaS
           </p>
         </div>

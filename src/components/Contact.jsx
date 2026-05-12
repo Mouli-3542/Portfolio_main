@@ -2,7 +2,7 @@
 
 // ─────────────────────────────────────────────────────────────
 // CONTACT SECTION — src/components/Contact.jsx
-// Clean minimal contact section
+// Clean minimal contact section - Dark theme
 // ─────────────────────────────────────────────────────────────
 
 import { motion } from 'framer-motion'
@@ -35,7 +35,11 @@ const socials = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="section-py relative overflow-hidden">
+    <section 
+      id="contact" 
+      className="py-24 md:py-32 relative overflow-hidden"
+      style={{ background: '#061012' }}
+    >
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Section Label */}
@@ -43,7 +47,8 @@ export default function Contact() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-accent-blue text-sm font-display font-600 tracking-[0.1em] uppercase mb-3"
+          className="text-sm font-display font-semibold tracking-[0.1em] uppercase mb-3"
+          style={{ color: '#88f3e7' }}
         >
           Get In Touch
         </motion.p>
@@ -54,11 +59,12 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="font-display font-800 text-[clamp(2rem,4.5vw,3.5rem)]
-                     leading-[1] tracking-tight text-ink-primary mb-4"
+          className="font-display font-bold text-[clamp(2rem,4.5vw,3.5rem)]
+                     leading-[1] tracking-tight mb-4"
+          style={{ color: '#dffcfa' }}
         >
           Ready to move{' '}
-          <span className="text-gradient-blue">your product</span>
+          <span className="text-gradient">your product</span>
           <br />
           forward?
         </motion.h2>
@@ -68,7 +74,8 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-ink-muted text-[0.92rem] max-w-md leading-relaxed mb-10"
+          className="text-[0.92rem] max-w-md leading-relaxed mb-10"
+          style={{ color: '#6ba8a3' }}
         >
           Book a free call or reach out on social. Let&apos;s turn your product into a motion story.
         </motion.p>
@@ -85,7 +92,19 @@ export default function Contact() {
             href={links.bookCall}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300"
+            style={{
+              background: '#88f3e7',
+              color: '#061012',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#a0f5ec'
+              e.currentTarget.style.boxShadow = '0 8px 30px rgba(136, 243, 231, 0.3)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#88f3e7'
+              e.currentTarget.style.boxShadow = 'none'
+            }}
           >
             Book a Free 30-min Call
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -107,19 +126,28 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="flex items-center gap-3 px-4 py-3 rounded-full
-                         border border-thin bg-bg-card
-                         hover:border-[rgba(255,255,255,0.12)] hover:bg-bg-elevated
-                         transition-all duration-200 group"
+              className="flex items-center gap-3 px-4 py-3 rounded-full transition-all duration-200 group"
+              style={{
+                background: '#0d1a1c',
+                border: '1px solid rgba(136, 243, 231, 0.1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.3)'
+                e.currentTarget.style.background = '#112224'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.1)'
+                e.currentTarget.style.background = '#0d1a1c'
+              }}
             >
-              <span className="text-ink-muted group-hover:text-ink-primary transition-colors">
+              <span style={{ color: '#6ba8a3' }} className="group-hover:text-[#88f3e7] transition-colors">
                 {social.icon}
               </span>
               <div>
-                <div className="font-display font-600 text-[0.85rem] text-ink-primary">
+                <div className="font-display font-semibold text-[0.85rem]" style={{ color: '#dffcfa' }}>
                   {social.name}
                 </div>
-                <div className="text-ink-muted text-[0.75rem]">{social.handle}</div>
+                <div className="text-[0.75rem]" style={{ color: '#6ba8a3' }}>{social.handle}</div>
               </div>
             </motion.a>
           ))}

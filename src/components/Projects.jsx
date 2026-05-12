@@ -12,13 +12,27 @@ import Link from 'next/link'
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 md:py-32 relative overflow-hidden projects-gradient">
+    <section 
+      id="projects" 
+      className="py-24 md:py-32 relative overflow-hidden"
+      style={{
+        background: `linear-gradient(
+          180deg,
+          #061012 0%,
+          rgba(136, 243, 231, 0.02) 30%,
+          rgba(136, 243, 231, 0.03) 50%,
+          rgba(136, 243, 231, 0.02) 70%,
+          #061012 100%
+        )`,
+      }}
+    >
 
-      {/* Background blue glow */}
+      {/* Background teal glow */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                        w-[1000px] h-[800px] rounded-full opacity-[0.04]"
-          style={{ background: 'radial-gradient(ellipse, #3b82f6 0%, transparent 60%)' }}
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                      w-[1000px] h-[800px] rounded-full opacity-[0.04]"
+          style={{ background: 'radial-gradient(ellipse, #88f3e7 0%, transparent 60%)' }}
         />
       </div>
 
@@ -32,11 +46,11 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="mb-12"
         >
-          <p className="text-accent-blue text-sm font-display font-600 tracking-[0.1em] uppercase mb-3">
+          <p className="text-[#88f3e7] text-sm font-display font-semibold tracking-[0.1em] uppercase mb-3">
             Selected Work
           </p>
-          <h2 className="font-display font-800 text-[clamp(2rem,4.5vw,3.5rem)]
-                         leading-[1] tracking-tight text-ink-primary">
+          <h2 className="font-display font-bold text-[clamp(2rem,4.5vw,3.5rem)]
+                         leading-[1] tracking-tight text-[#dffcfa]">
             Recent Projects
           </h2>
         </motion.div>
@@ -58,7 +72,20 @@ export default function Projects() {
         >
           <Link
             href="/projects"
-            className="btn-ghost group"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 group"
+            style={{
+              background: 'transparent',
+              border: '1px solid rgba(136, 243, 231, 0.2)',
+              color: '#dffcfa',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.4)'
+              e.currentTarget.style.background = 'rgba(136, 243, 231, 0.05)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(136, 243, 231, 0.2)'
+              e.currentTarget.style.background = 'transparent'
+            }}
           >
             Show All Projects
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" 
