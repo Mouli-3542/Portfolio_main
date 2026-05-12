@@ -8,37 +8,34 @@ module.exports = {
   theme: {
     extend: {
       // ─────────────────────────────────────────────
-      // COLORS — User specified palette
+      // COLORS — edit here to change the brand palette
       // ─────────────────────────────────────────────
       colors: {
         bg: {
-          primary:   '#061012',
-          secondary: '#0a1416',
-          card:      '#0d1a1c',
-          elevated:  '#112224',
+          primary:   '#070708',
+          secondary: '#0E0E10',
+          card:      '#111114',
         },
         accent: {
-          primary:   '#88f3e7',
-          secondary: '#282881',
-          purple:    '#5102f6',
-          glow:      'rgba(136, 243, 231, 0.15)',
+          blue:   '#5B8EF0',
+          violet: '#9B7AF5',
+          glow:   '#3D6FE0',
         },
         brand: {
-          DEFAULT: '#88f3e7',
+          DEFAULT: '#5B8EF0',
         },
         ink: {
-          primary:   '#dffcfa',
-          secondary: '#b8e8e4',
-          muted:     '#6ba8a3',
-          subtle:    '#3d6663',
+          primary: '#F2F1EE',
+          muted:   '#7A7A8A',
+          subtle:  '#3E3E4A',
         },
       },
       // ─────────────────────────────────────────────
-      // FONTS — Geist + SF Pro Display
+      // FONTS — defined in globals.css via Google Fonts
       // ─────────────────────────────────────────────
       fontFamily: {
-        display: ['var(--font-sf-pro)', 'system-ui', 'sans-serif'],
-        body:    ['var(--font-geist)', 'system-ui', 'sans-serif'],
+        display: ['Syne', 'sans-serif'],
+        body:    ['Plus Jakarta Sans', 'sans-serif'],
       },
       // ─────────────────────────────────────────────
       // SPACING & SIZING
@@ -62,16 +59,11 @@ module.exports = {
         'float':      'float 6s ease-in-out infinite',
         'float-slow': 'float 9s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'typing-dot': 'typing-dot 1.4s ease-in-out infinite',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%':      { transform: 'translateY(-12px)' },
-        },
-        'typing-dot': {
-          '0%, 60%, 100%': { transform: 'translateY(0)', opacity: '0.3' },
-          '30%': { transform: 'translateY(-4px)', opacity: '1' },
         },
       },
     },

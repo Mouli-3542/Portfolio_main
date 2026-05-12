@@ -2,7 +2,7 @@
 
 // ─────────────────────────────────────────────────────────────
 // MARQUEE STRIP — src/components/Marquee.jsx
-// Subtle infinite scrolling text strip - Dark theme
+// Subtle infinite scrolling text strip
 // ─────────────────────────────────────────────────────────────
 
 import { motion } from 'framer-motion'
@@ -21,21 +21,12 @@ const doubled = [...items, ...items]
 
 export default function Marquee() {
   return (
-    <div 
-      className="relative overflow-hidden py-5"
-      style={{
-        background: '#061012',
-        borderTop: '1px solid rgba(136, 243, 231, 0.08)',
-        borderBottom: '1px solid rgba(136, 243, 231, 0.08)',
-      }}
-    >
+    <div className="relative overflow-hidden py-5 border-y border-[rgba(255,255,255,0.04)]">
       {/* Edge fades */}
-      <div className="absolute inset-y-0 left-0 w-20 z-10 pointer-events-none"
-        style={{ background: 'linear-gradient(to right, #061012, transparent)' }}
-      />
-      <div className="absolute inset-y-0 right-0 w-20 z-10 pointer-events-none"
-        style={{ background: 'linear-gradient(to left, #061012, transparent)' }}
-      />
+      <div className="absolute inset-y-0 left-0 w-20 z-10
+                      bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-20 z-10
+                      bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none" />
 
       <motion.div
         className="flex gap-8 whitespace-nowrap"
@@ -46,14 +37,10 @@ export default function Marquee() {
           <span
             key={i}
             className="inline-flex items-center gap-3 text-[0.72rem] font-display
-                       font-semibold tracking-[0.1em] uppercase"
-            style={{ color: '#6ba8a3' }}
+                       font-600 text-ink-subtle tracking-[0.1em] uppercase"
           >
             {item}
-            <span 
-              className="w-1 h-1 rounded-full inline-block" 
-              style={{ background: '#88f3e7' }}
-            />
+            <span className="w-1 h-1 rounded-full bg-accent-blue/50 inline-block" />
           </span>
         ))}
       </motion.div>

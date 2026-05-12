@@ -1,7 +1,9 @@
 /* ─────────────────────────────────────────────────────────────
    CINOVA VISUALS — Global Styles
-   Dark theme with teal/cyan accents
+   Clean minimal black & grey with blue accents
    ───────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,31 +11,28 @@
 
 /* ─── CSS Design Tokens ─────────────────────────────────────── */
 :root {
-  /* User specified colors */
-  --bg-primary:   #061012;
-  --bg-secondary: #0a1416;
-  --bg-card:      #0d1a1c;
-  --bg-elevated:  #112224;
+  --bg-primary:   #0a0a0a;
+  --bg-secondary: #0f0f0f;
+  --bg-card:      #141414;
+  --bg-elevated:  #1a1a1a;
 
-  --accent-primary:   #88f3e7;
-  --accent-secondary: #282881;
-  --accent-purple:    #5102f6;
-  --accent-glow:      rgba(136, 243, 231, 0.15);
+  --accent-blue:   #3b82f6;
+  --accent-blue-soft: #60a5fa;
+  --accent-glow:   rgba(59, 130, 246, 0.15);
 
-  --ink-primary:   #dffcfa;
-  --ink-secondary: #b8e8e4;
-  --ink-muted:     #6ba8a3;
-  --ink-subtle:    #3d6663;
+  --ink-primary:  #fafafa;
+  --ink-secondary: #e5e5e5;
+  --ink-muted:    #737373;
+  --ink-subtle:   #404040;
 
-  --border-thin:  rgba(136, 243, 231, 0.08);
-  --border-soft:  rgba(136, 243, 231, 0.15);
+  --border-thin:  rgba(255, 255, 255, 0.06);
+  --border-soft:  rgba(255, 255, 255, 0.1);
 
   --radius-card:  1rem;
-  --radius-btn:   9999px;
+  --radius-btn:   0.5rem;
 
-  /* Font variables */
-  --font-geist: 'Geist', system-ui, sans-serif;
-  --font-sf-pro: 'SF Pro Display', system-ui, sans-serif;
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'Plus Jakarta Sans', sans-serif;
 }
 
 /* ─── Base Reset ────────────────────────────────────────────── */
@@ -51,9 +50,9 @@ html {
 }
 
 body {
-  background: var(--bg-primary);
+  background: linear-gradient(180deg, var(--bg-primary) 0%, #0d0d0d 50%, var(--bg-primary) 100%);
   color: var(--ink-primary);
-  font-family: var(--font-geist);
+  font-family: var(--font-body);
   overflow-x: hidden;
   line-height: 1.6;
 }
@@ -65,26 +64,26 @@ body {
 
 /* ─── Selection ─────────────────────────────────────────────── */
 ::selection {
-  background: rgba(136, 243, 231, 0.3);
+  background: rgba(59, 130, 246, 0.3);
   color: var(--ink-primary);
 }
 
 /* ─── Utility Classes ───────────────────────────────────────── */
 @layer utilities {
-  .font-display { font-family: var(--font-sf-pro); }
-  .font-body    { font-family: var(--font-geist); }
+  .font-display { font-family: var(--font-display); }
+  .font-body    { font-family: var(--font-body); }
 
-  /* Gradient text — teal accent */
+  /* Gradient text — clean blue */
   .text-gradient {
-    background: linear-gradient(135deg, #dffcfa 0%, #88f3e7 100%);
+    background: linear-gradient(135deg, #fafafa 0%, #3b82f6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Gradient text — purple accent */
-  .text-gradient-purple {
-    background: linear-gradient(135deg, #88f3e7 0%, #5102f6 100%);
+  /* Gradient text — blue accent */
+  .text-gradient-blue {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -92,21 +91,10 @@ body {
 
   /* Glass card surface */
   .glass {
-    background: rgba(13, 26, 28, 0.8);
+    background: rgba(20, 20, 20, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--border-thin);
-  }
-
-  /* Navbar glass effect */
-  .navbar-glass {
-    background: rgba(6, 16, 18, 0.7);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    box-shadow: 
-      0 0 1px rgba(136, 243, 231, 0.4),
-      0 0 8px rgba(136, 243, 231, 0.1),
-      inset 0 0 0 1px rgba(136, 243, 231, 0.1);
   }
 
   /* Thin border */
@@ -114,9 +102,9 @@ body {
   .border-soft { border: 1px solid var(--border-soft); }
 
   /* Ambient glow */
-  .glow-teal {
-    box-shadow: 0 0 60px rgba(136, 243, 231, 0.1),
-                0 0 120px rgba(136, 243, 231, 0.05);
+  .glow-blue {
+    box-shadow: 0 0 60px rgba(59, 130, 246, 0.1),
+                0 0 120px rgba(59, 130, 246, 0.05);
   }
 
   /* Section spacing */
@@ -150,29 +138,29 @@ body {
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.75rem;
-  background: rgba(136, 243, 231, 0.1);
-  border: 1px solid rgba(136, 243, 231, 0.2);
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
   border-radius: 999px;
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--accent-primary);
+  color: var(--accent-blue-soft);
 }
 
-/* ─── Button Base — More Rounded ────────────────────────────── */
+/* ─── Button Base ───────────────────────────────────────────── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.875rem 1.75rem;
-  background: var(--accent-primary);
-  color: var(--bg-primary);
-  font-family: var(--font-sf-pro);
+  background: var(--accent-blue);
+  color: #fff;
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.02em;
-  border-radius: 9999px;
+  border-radius: var(--radius-btn);
   transition: all 0.2s ease;
   cursor: pointer;
   border: none;
@@ -180,9 +168,9 @@ body {
 }
 
 .btn-primary:hover {
-  background: #a0f5ec;
+  background: #2563eb;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(136, 243, 231, 0.25);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
 }
 
 .btn-primary:active {
@@ -196,11 +184,11 @@ body {
   padding: 0.875rem 1.75rem;
   background: transparent;
   color: var(--ink-primary);
-  font-family: var(--font-sf-pro);
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.02em;
-  border-radius: 9999px;
+  border-radius: var(--radius-btn);
   border: 1px solid var(--border-soft);
   transition: all 0.2s ease;
   cursor: pointer;
@@ -208,8 +196,8 @@ body {
 }
 
 .btn-ghost:hover {
-  border-color: rgba(136, 243, 231, 0.3);
-  background: rgba(136, 243, 231, 0.05);
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
   transform: translateY(-1px);
 }
 
@@ -223,12 +211,12 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.625rem 1rem;
-  background: rgba(136, 243, 231, 0.05);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--ink-muted);
-  font-family: var(--font-sf-pro);
+  font-family: var(--font-display);
   font-weight: 500;
   font-size: 0.85rem;
-  border-radius: 9999px;
+  border-radius: var(--radius-btn);
   border: 1px solid var(--border-thin);
   transition: all 0.15s ease;
   cursor: pointer;
@@ -237,7 +225,7 @@ body {
 
 .btn-back:hover {
   color: var(--ink-primary);
-  background: rgba(136, 243, 231, 0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-color: var(--border-soft);
 }
 
@@ -245,86 +233,14 @@ body {
   transform: scale(0.98);
 }
 
-/* ─── Dark Pill Button (like Book a Call) ───────────────────── */
-.btn-dark-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.875rem 1.5rem;
-  background: var(--bg-card);
-  color: var(--ink-primary);
-  font-family: var(--font-sf-pro);
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.02em;
-  border-radius: 9999px;
-  border: 1px solid var(--border-thin);
-  transition: all 0.2s ease;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.btn-dark-pill:hover {
-  background: var(--bg-elevated);
-  border-color: var(--border-soft);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-}
-
-.btn-dark-pill:active {
-  transform: translateY(0);
-}
-
-/* ─── Projects Section Gradient ─────────────────────────────── */
+/* ─── Projects Section Blue Gradient ────────────────────────── */
 .projects-gradient {
   background: linear-gradient(
     180deg,
     var(--bg-primary) 0%,
-    rgba(136, 243, 231, 0.02) 30%,
-    rgba(136, 243, 231, 0.03) 50%,
-    rgba(136, 243, 231, 0.02) 70%,
+    rgba(59, 130, 246, 0.03) 30%,
+    rgba(59, 130, 246, 0.05) 50%,
+    rgba(59, 130, 246, 0.03) 70%,
     var(--bg-primary) 100%
   );
-}
-
-/* ─── Typing Dots Animation ─────────────────────────────────── */
-@keyframes typing-dot-frame {
-  0% { opacity: 0.2; }
-  25% { opacity: 1; }
-  50% { opacity: 0.2; }
-  100% { opacity: 0.2; }
-}
-
-.typing-dot-1 {
-  animation: typing-dot-frame 1.2s ease-in-out infinite;
-  animation-delay: 0s;
-}
-
-.typing-dot-2 {
-  animation: typing-dot-frame 1.2s ease-in-out infinite;
-  animation-delay: 0.2s;
-}
-
-.typing-dot-3 {
-  animation: typing-dot-frame 1.2s ease-in-out infinite;
-  animation-delay: 0.4s;
-}
-
-/* ─── Tool Stack Card ───────────────────────────────────────── */
-.tool-card {
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-thin);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.tool-card:hover {
-  border-color: var(--border-soft);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }

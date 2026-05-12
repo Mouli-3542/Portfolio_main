@@ -2,7 +2,7 @@
 
 // ─────────────────────────────────────────────────────────────
 // PROJECT CARD — src/components/ProjectCard.jsx
-// Displays project thumbnail with enhanced edge glow on hover
+// Displays project thumbnail, title, and info. Clicks to detail page.
 // ─────────────────────────────────────────────────────────────
 
 import { useState } from 'react'
@@ -25,59 +25,29 @@ export default function ProjectCard({ project, index }) {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
-        className="relative rounded-2xl overflow-hidden group cursor-pointer h-full"
+        className="relative rounded-xl overflow-hidden border border-thin
+                   bg-bg-card group cursor-pointer h-full"
         style={{
-          background: '#0d1a1c',
-          border: hovered 
-            ? '1px solid rgba(136, 243, 231, 0.4)' 
-            : '1px solid rgba(136, 243, 231, 0.1)',
           boxShadow: hovered
-            ? `0 0 40px rgba(136, 243, 231, 0.3), 
-               0 0 80px rgba(136, 243, 231, 0.15), 
-               0 0 120px rgba(81, 2, 246, 0.1),
-               0 20px 60px rgba(0,0,0,0.5),
-               inset 0 0 40px rgba(136, 243, 231, 0.05)`
-            : '0 4px 20px rgba(0,0,0,0.3)',
-          transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
-          transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+            ? '0 20px 60px rgba(0,0,0,0.4)'
+            : '0 4px 20px rgba(0,0,0,0.2)',
+          transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
+          transition: 'all 0.25s ease',
         }}
       >
-        {/* Enhanced edge glow effect */}
+        {/* Hover glow effect */}
         <motion.div
-          className="absolute inset-0 rounded-2xl pointer-events-none z-20"
+          className="absolute inset-0 rounded-xl pointer-events-none z-0"
           animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.3 }}
           style={{
-            boxShadow: 'inset 0 0 40px rgba(136, 243, 231, 0.2), inset 0 0 80px rgba(136, 243, 231, 0.08)',
-          }}
-        />
-
-        {/* Outer glow border */}
-        <motion.div
-          className="absolute -inset-[2px] rounded-2xl pointer-events-none z-10"
-          animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
-          style={{
-            background: 'linear-gradient(135deg, rgba(136, 243, 231, 0.5), rgba(81, 2, 246, 0.3), rgba(136, 243, 231, 0.5))',
-            padding: '2px',
-            borderRadius: '1rem',
-          }}
-        />
-
-        {/* Background glow */}
-        <motion.div
-          className="absolute inset-0 rounded-2xl pointer-events-none z-0"
-          animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
-          style={{
-            background: `radial-gradient(ellipse at top left, rgba(136, 243, 231, 0.12) 0%, transparent 50%), 
-                        radial-gradient(ellipse at bottom right, rgba(81, 2, 246, 0.1) 0%, transparent 50%)`,
+            background: 'radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.08) 0%, transparent 60%)',
           }}
         />
 
         <div className="relative z-10">
           {/* Thumbnail Section */}
-          <div className="relative aspect-video overflow-hidden" style={{ background: '#0a1416' }}>
+          <div className="relative aspect-video overflow-hidden bg-bg-secondary">
             {hasThumbnail ? (
               <Image
                 src={project.thumbnailUrl}
@@ -89,23 +59,17 @@ export default function ProjectCard({ project, index }) {
               />
             ) : (
               // Placeholder when no thumbnail
-              <div 
-                className="absolute inset-0 flex items-center justify-center"
-                style={{
-                  background: 'linear-gradient(135deg, #0d1a1c 0%, #112224 100%)',
-                }}
-              >
+              <div className="absolute inset-0 bg-gradient-to-br from-bg-elevated to-bg-card flex items-center justify-center">
                 <div className="text-center">
                   <svg 
                     width="40" 
                     height="40" 
                     viewBox="0 0 24 24" 
-                    className="mx-auto mb-2"
-                    style={{ color: 'rgba(136, 243, 231, 0.3)' }}
+                    className="text-ink-subtle/50 mx-auto mb-2"
                   >
                     <path d="M8 5v14l11-7z" fill="currentColor"/>
                   </svg>
-                  <span style={{ color: 'rgba(136, 243, 231, 0.4)' }} className="text-xs font-medium">
+                  <span className="text-ink-subtle/40 text-xs font-medium">
                     {project.category}
                   </span>
                 </div>
@@ -115,16 +79,10 @@ export default function ProjectCard({ project, index }) {
             {/* Play icon overlay on hover */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/40 
                             opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              <div 
-                className="w-14 h-14 rounded-full backdrop-blur-sm 
-                          flex items-center justify-center
-                          transform scale-90 group-hover:scale-100 transition-transform duration-200"
-                style={{
-                  background: 'rgba(136, 243, 231, 0.1)',
-                  border: '1px solid rgba(136, 243, 231, 0.3)',
-                }}
-              >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="#88f3e7">
+              <div className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm 
+                              flex items-center justify-center border border-white/20
+                              transform scale-90 group-hover:scale-100 transition-transform duration-200">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
               </div>
@@ -132,29 +90,20 @@ export default function ProjectCard({ project, index }) {
 
             {/* Category badge */}
             <div className="absolute top-3 left-3">
-              <span 
-                className="inline-flex items-center px-3 py-1 rounded-full text-[0.68rem] font-medium"
-                style={{
-                  background: 'rgba(136, 243, 231, 0.1)',
-                  border: '1px solid rgba(136, 243, 231, 0.2)',
-                  color: '#88f3e7',
-                }}
-              >
-                {project.category}
-              </span>
+              <span className="tag-pill text-[0.68rem]">{project.category}</span>
             </div>
           </div>
 
           {/* Content Section */}
           <div className="p-5">
             {/* Title */}
-            <h3 className="font-display text-lg font-bold text-[#dffcfa] mb-2 tracking-tight
-                           group-hover:text-[#88f3e7] transition-colors flex items-center justify-between">
+            <h3 className="font-display text-lg font-700 text-ink-primary mb-2 tracking-tight
+                           group-hover:text-white transition-colors flex items-center justify-between">
               {project.title}
               <motion.div
                 animate={{ x: hovered ? 4 : 0 }}
                 transition={{ duration: 0.2 }}
-                style={{ color: '#6ba8a3' }}
+                className="text-ink-subtle"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" 
@@ -164,7 +113,7 @@ export default function ProjectCard({ project, index }) {
             </h3>
 
             {/* Description */}
-            <p className="text-[#6ba8a3] text-[0.85rem] leading-relaxed line-clamp-2 mb-4">
+            <p className="text-ink-muted text-[0.85rem] leading-relaxed line-clamp-2 mb-4">
               {project.description}
             </p>
 
@@ -173,12 +122,9 @@ export default function ProjectCard({ project, index }) {
               {project.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="text-[0.68rem] px-3 py-1 rounded-full font-medium"
-                  style={{
-                    background: 'rgba(136, 243, 231, 0.05)',
-                    border: '1px solid rgba(136, 243, 231, 0.1)',
-                    color: '#6ba8a3',
-                  }}
+                  className="text-[0.68rem] px-2 py-0.5 rounded-full font-medium
+                             bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)]
+                             text-ink-muted"
                 >
                   {tag}
                 </span>
